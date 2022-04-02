@@ -343,22 +343,40 @@
               </div>
             </div>
             <div class="card-body pt-4 p-3">
-              <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Newest</h6>
-              <ul class="list-group">
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                  <div class="d-flex align-items-center">
-                    <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-down"></i></button>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">Netflix</h6>
-                      <span class="text-xs">27 March 2020, at 12:30 PM</span>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
-                    - $ 2,500
-                  </div>
-                </li>
+              <table class="table align-items-center mb-0" id="orderComplete">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Symbol</th>
+                      <th class="text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Close</th>
+                      
+                      <th class="text-secondary opacity-7">Profit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach($finish as $item){ ?>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <button class="btn btn-icon-only btn-rounded btn-outline-<?php echo $item->type == "buy" ? "info" : "danger";?> mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-<?php echo $item->type == "buy" ? "up" : "down";?>"></i></button>
+                          <div class="d-flex flex-column">
+                            <h6 class="mb-1 text-dark text-sm"><?php echo $item->symbol;?> <?php echo strtoupper($item->type);?></h6>
+                            <span class="text-xs"><?php echo date("d-m h:i A",$item->close_time);?></span>
+                          </div>
+                        </div>
+                      </td>
+                      <td><?php echo strtoupper($item->close_type);?></td>
+                      <td><?php echo $item->close_at;?></td>
+                      <td class="text-end">
+                        <div class="text-<?php echo $item->profit_pip > 0 ? "info text-gradient " : ($item->profit_pip < 0 ? "danger text-gradient " : "secondary");?> text-sm font-weight-bold">
+                        <?php echo $item->profit_pip > 0 ? "+" : ($item->profit_pip < 0 ? "" : ":");?> <?php echo $item->profit_pip;?> pip(s) | $<?php echo $item->profit_usd;?>
+                      </div>
+                      </td>
+                    </tr>
+                    <?php } ?>
+                  </tbody>
+              </table>
                 
-              </ul>
               
             </div>
           </div>

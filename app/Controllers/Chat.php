@@ -8,7 +8,7 @@ class Chat extends BaseController
     public function __construct(){
 
         $this->db = new OfferModel;
-        
+
     }
 
     public function index()
@@ -18,6 +18,7 @@ class Chat extends BaseController
             return redirect()->route('login');
         }
         $offer = $this->db->findAll();
-        return view('pages/chat',["offer" => $offer, "header" => $this->getHeader(["title" => "Lead Offer"])]);
+        $finish = $this->db->getFinish();
+        return view('pages/chat',["offer" => $offer, "finish" => $finish, "header" => $this->getHeader(["title" => "Lead Offer"])]);
     }
 }

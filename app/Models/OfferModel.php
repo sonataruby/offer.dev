@@ -26,4 +26,9 @@ class OfferModel extends Model
     public function updateClick($id, $click){
         $this->update($id,["click" => $click]);
     }
+
+
+    public function getFinish(){
+        return $this->table("offer_finish")->orderBy("id","DESC")->get(30)->getResult();
+    }
 }
