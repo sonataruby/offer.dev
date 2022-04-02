@@ -8,7 +8,7 @@ class Chat extends BaseController
     public function __construct(){
 
         $this->db = new OfferModel;
-        parent::__construct();
+        
     }
 
     public function index()
