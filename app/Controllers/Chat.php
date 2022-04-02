@@ -15,7 +15,7 @@ class Chat extends BaseController
     {   
         if (!logged_in())
         {
-           // return redirect()->route('login');
+            return redirect()->route('login');
         }
         $offer = $this->db->findAll();
         $finish = $this->db->getFinish();
