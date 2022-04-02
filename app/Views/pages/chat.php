@@ -364,7 +364,41 @@
           </div>
         </div>
       </div>
-     
+      
+      <div class="card mt-3">
+          <div class="card-header border-bottom">Offer Task</div>
+          <div class="card-body">
+            <table class="table">
+              <thead>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Cost</th>
+                <th>Device</th>
+                <th>Link</th>
+                <th>Lead</th>
+                <th></th>
+              </thead>
+              <tbody>
+                <?php foreach ($offer as $key => $value) { ?>
+                  
+                <tr>
+                  <td><?php echo $value->id;?></td>
+                  <td><?php echo $value->name;?></td>
+                  <td><?php echo $value->cost;?></td>
+                  <td><?php echo $value->device;?></td>
+                  <td>
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" readonly value="<?php echo base_url("click-".$value->id.".html");?>">
+                      <button class="btn btn-outline-secondary" type="button" id="button-addon2">Copy</button>
+                    </div>
+                  </td>
+                  <td><?php echo $value->lead;?> / <?php echo $value->maxlead;?></td>
+                </tr>
+                <?php } ?>
+              </tbody>
+            </table>
+          </div>
+      </div>
     </div>
   
 <?= $this->endSection() ?>

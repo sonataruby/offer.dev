@@ -1,12 +1,23 @@
 <?php
 
 namespace App\Controllers;
-
+use App\Models\OfferModel;
 class Chat extends BaseController
 {
+    private $db;
+    public function __construct(){
+
+        $this->db = new OfferModel;
+        parent::__construct();
+    }
 
     public function index()
-    {
-        return view('pages/chat');
+    {   
+        if (!logged_in())
+        {
+            return redirect()->route('login');
+        }
+        $offer = $this->db->findAll();
+        return view('pages/chat',["offer" => $offer, "header" => $this->getHeader(["title" => "Lead Offer"])]);
     }
 }

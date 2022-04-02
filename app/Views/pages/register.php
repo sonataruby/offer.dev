@@ -1,4 +1,4 @@
-<?php echo view('App\Views\header'); ?>
+<?php echo view('App\Views\header',["title" => "Register Page"]); ?>
 
 
   

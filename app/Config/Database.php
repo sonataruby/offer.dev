@@ -35,7 +35,7 @@ class Database extends Config
         'hostname' => 'localhost',
         'username' => 'root',
         'password' => 'root',
-        'database' => 'ci4_nodejs',
+        'database' => 'offer_project',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
