@@ -3,8 +3,8 @@
 <?= $this->section('javascript') ?>
 <script src="/assets/js/socket.io.js?v=2.0.2"></script>
     <script type="text/javascript">
-      var socket = io("http://103.153.68.56:7000", {
-        withCredentials: false,
+      var socket = io("ws://103.153.68.56:7000", {
+        withCredentials: true,
         extraHeaders: {
           "username": "<?php echo user_id();?>"
         }
