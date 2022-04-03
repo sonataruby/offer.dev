@@ -347,9 +347,9 @@
                   <td><?php echo $value->device;?></td>
                   <td><?php echo $value->country;?></td>
                   <td>
-                    <div class="input-group" style="margin-right: 5px;">
+                    <div class="input-group">
                       <input type="text" class="form-control" readonly value="<?php echo base_url("click-".$value->id."-".user_id().".html");?>">
-                      <button class="btn btn-outline-secondary" type="button" id="button-addon2">Copy</button>
+                      <button class="btn btn-primary" type="button" id="button-addon2">Copy</button>
                     </div>
                   </td>
                   <td><?php echo $value->lead;?> / <?php echo $value->maxlead;?></td>
