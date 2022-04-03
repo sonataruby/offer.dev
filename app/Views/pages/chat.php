@@ -48,11 +48,11 @@
                 
             <div class="incoming__message">
               <div class="d-flex flex-column received__message">
-                <h6 class="mb-3 text-sm">${message}</h6>
+                
                 <div class="message__info">
-                  <span class="mb-2 text-xs message__author">${user}</span>
-                  <span class="text-dark font-weight-bold ms-sm-2 time_date">${formattedTime}</span>
+                  <span class="mb-2 text-xs message__author">${user} | ${formattedTime}</span>
                 </div>
+                <h6 class="mb-3 text-sm">${message}</h6>
               </div>
             </div>
         </li>
@@ -65,11 +65,12 @@
                 
             <div class="incoming__message">
               <div class="d-flex flex-column received__message">
-                <h6 class="mb-3 text-sm">${message}</h6>
+                
                 <div class="message__info">
-                  <span class="mb-2 text-xs message__author">${user}</span>
-                  <span class="text-dark font-weight-bold ms-sm-2 time_date">${formattedTime}</span>
+                  <span class="mb-2 text-xs message__author">Your | ${formattedTime}</span>
+                  
                 </div>
+                <h6 class="mb-3 text-sm">${message}</h6>
               </div>
             </div>
         </li>`;
@@ -129,7 +130,7 @@
       inputField.addEventListener("keyup", () => {
         socket.emit("typing", {
           isTyping: inputField.value.length > 0,
-          nick: userName,
+          nick: "<?php echo user()->username;?>",
         });
       });
 
@@ -142,7 +143,7 @@
       });
 
       socket.on("chat message", function (data) {
-        addNewMessage({ user: "Administrator", message: data.message });
+        addNewMessage({ user: data.username, message: data.message });
       });
 
       socket.on("signal reward", function (data) {
@@ -290,11 +291,12 @@
                   <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                       <div class="incoming__message">
                         <div class="d-flex flex-column received__message">
-                          <h6 class="mb-3 text-sm"><?php echo $value->messages;?></h6>
+                          
                           <div class="message__info">
-                            <span class="mb-2 text-xs message__author"><?php echo $value->username;?></span>
-                            <span class="text-dark font-weight-bold ms-sm-2 time_date"><?php echo $value->created_at;?></span>
+                            <span class="mb-2 text-xs message__author"><?php echo $value->username;?> | <?php echo $value->created_at;?></span>
+                            
                           </div>
+                          <h6 class="mb-3 text-sm"><?php echo $value->messages;?></h6>
                         </div>
                       </div>
                   </li>
