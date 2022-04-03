@@ -19,10 +19,7 @@ class Clickoffer extends BaseController
     }
     public function index($id)
     {
-        if (!logged_in())
-        {
-            return redirect()->route('login');
-        }
+        
         $ip = $this->request->getIPAddress();
         $useragent = $this->request->getUserAgent();
         $this->offer->join("offer_api","offer_api.id=api_id","left");
