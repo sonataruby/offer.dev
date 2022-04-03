@@ -56,9 +56,6 @@ class Clickoffer extends BaseController
             die("Device not support");
         }
 
-        if($offer->device == "mobile" && $useragent->isPc()){
-            die("Device not support");
-        }
 
 
         $this->click->where(["offer_id" => $id, "ip" => $ip]);
@@ -67,6 +64,9 @@ class Clickoffer extends BaseController
             die("Ip Ready Work");
         }
 
+        if(strtolower($this->client->countryCode) != strtolower($offer->country)){
+            die("Country not support");
+        }
 
         $arvClick = [
             "ip" => $this->client->query,
