@@ -247,13 +247,13 @@
             
           </div>
         </div>
-        <div class="col-md-7 mt-4">
+        <div class="col-md-6 mt-4">
           <div class="card">
             <div class="card-header pb-0 px-3">
               <h6 class="mb-0">Chat's</h6>
             </div>
             <div class="card-body pt-4 p-3">
-              <div class="inbox__messages" style="height:300px; overflow-y: auto;">
+              <div class="inbox__messages" style="height:420px; overflow-y: auto;">
                 <ul class="messages__history list-group"></ul>
                 <div class=""></div>
                 
@@ -269,7 +269,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-5 mt-4">
+        <div class="col-md-6 mt-4">
           <div class="card h-100 mb-4">
             <div class="card-header pb-0 px-3">
               <div class="row">
@@ -286,9 +286,9 @@
               <table class="table align-items-center mb-0" id="orderComplete">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Username</th>
-                      <th class="text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Net</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Reward</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Leader</th>
+                      
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-end">Reward</th>
                       
                     </tr>
                   </thead>
@@ -299,13 +299,13 @@
                         <div class="d-flex align-items-center">
                           
                           <div class="d-flex flex-column">
-                            <h6 class="mb-1 text-dark text-sm"><?php echo $item->username;?> <?php echo strtoupper($item->ip);?></h6>
-                            <span class="text-xs"><?php echo date("d-m h:i A",$item->close_time);?></span>
+                            <h6 class="mb-1 text-dark text-sm"><?php echo $item->firstname;?> <?php echo $item->lastname;?> <?php echo strtoupper($item->ip);?></h6>
+                            <span class="text-xs">Click : <?php echo date("d-m h:i A",$item->created_at);?> | <?php echo $item->name;?> | Lead : <?php echo date("d-m h:i A",$item->updated_at);?></span>
                           </div>
                         </div>
                       </td>
-                      <td><?php echo strtoupper($item->close_type);?></td>
-                      <td class="text-end"><?php echo $item->close_at;?></td>
+                      
+                      <td class="text-end"><?php echo $item->cost;?>$</td>
                       
                       </td>
                     </tr>

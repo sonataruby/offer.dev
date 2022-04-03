@@ -1,6 +1,7 @@
 const express = require("express");
 const socket = require("socket.io");
 var bodyParser = require('body-parser');
+var mysql      = require('mysql');
 // App setup
 const PORT = 7000;
 const app = express();
@@ -33,7 +34,24 @@ app.post("/reward",function(request, response) {
   response.send("ok");
 });
 
+const setmsg = (auth_id, username, messages) =>{
 
+  var connection = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'root',
+    password : 'root',
+    database : 'offer_project'
+  });
+   
+  connection.connect();
+   
+  connection.query("INSERT INTO chat (`auth_id`, `username`, `messages`) values ('"+auth_id+"','"+username+"','"+messages+"');", function (error, results, fields) {
+    if (error) throw error;
+    console.log('The solution is: ', results[0].solution);
+  });
+   
+  connection.end();
+}
 
 const activeUsers = new Set();
 
@@ -52,6 +70,7 @@ io.on("connection", function (socket) {
   });
 
   socket.on("chat message", function (data) {
+    setmsg(data.id, data.username, data.msg);
     io.emit("chat message", data);
   });
   

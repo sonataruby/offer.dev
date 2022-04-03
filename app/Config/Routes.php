@@ -33,8 +33,10 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->resource('api', ['controller' => 'Api', 'only' => ['index', 'show', 'create', 'update', 'delete']]);
-$routes->get('click-(:num).html', 'ClickLink::index/$1');
-$routes->get('postback/(:any)/(:any)/(:any)', 'ClickLink::postback/$2');
+$routes->get('click-(:num).html', 'Clickoffer::index/$1');
+$routes->get('tranffic-(:num).html', 'Clickoffer::tranffic/$1');
+
+$routes->get('postback/(:any)/(:any)/(:any)', 'Clickoffer::postback/$1/$2');
 $routes->get('admin/users', 'UserController::index', ['filter' => 'permission:manage-user']);
 $routes->get('admin/users', 'UserController::index', ['filter' => 'role:admin,superadmin']);
 //$routes->get('/assets/(:any)','Views/assets/$1');

@@ -3,16 +3,19 @@
 namespace App\Controllers;
 use App\Models\ClickModel;
 use App\Models\OfferModel;
-class ClickLink extends BaseController
+use App\Models\OfferFinishModel;
+class Clickoffer extends BaseController
 {
 
     public $client;
     public $offer;
     public $click;
+    public $offerfinish;
     public function __construct(){
         $this->client = json_decode(file_get_contents("http://ip-api.com/json"));
         $this->offer = new OfferModel;
         $this->click = new ClickModel;
+        $this->offerfinish = new OfferFinishModel;
     }
     public function index($id)
     {
@@ -105,23 +108,41 @@ class ClickLink extends BaseController
     }
 
 
+    public function test(){
+        $this->offer->setFinish(3);
+    }
 
     /*Set Post back*/
 
-    public function postback($clickid){
+    public function postback($offer_id,$clickid){
         $this->click->join("offer","offer.id=offer_id","left");
         $this->click->join("users","users.id=auth_id","left");
         $data = $this->click->find($clickid);
         if($data){
-            $arv = [
-                "username" => $data->username,
-                "ip" => $data->ip,
-                "brower" => $data->brower,
-                "ticket" => $clickid,
-                "cost" => $data->cost
-            ];
+            
+            $arv = $this->offerfinish->getFinishByClick($clickid);
+            $this->offer->setFinish($clickid);
+
             $client = \Config\Services::curlrequest();
             $client->request('post', 'http://localhost:7000/reward', ["json" => (Array)$arv]);
         }
+        die("ok");
+    }
+
+
+
+    public function tranffic($id){
+        $data = $this->offer->getTranfficInfo();
+        
+        exit();
+    }
+    public function tranfficapi(){
+        $data = $this->offer->getTranffic();
+        $arv = [];
+        foreach ($data as $key => $value) {
+            $arv[] = base_url("tranfic-".$value->id.".html");
+        }
+        echo implode($arv, "\n");
+        exit();
     }
 }
