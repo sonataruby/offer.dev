@@ -172,11 +172,39 @@ class Clickoffer extends BaseController
         $arv = [];
         foreach ($data as $key => $value) {
             if($value->number > $value->runnumber){
-                $arv[] = base_url("tranfic-".$value->id.".html");
+                $arv[] = base_url("tranffic-".$value->id.".html");
             }
             
         }
         echo implode($arv, ";");
         exit();
+    }
+
+
+    public function cronclick(){
+        
+        
+        $url = $this->request->getGet("url");
+        print_r($url);
+        $proxy = '192.168.1.34:1080';
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        //curl_setopt($ch, CURLOPT_PROXY, $proxy);
+        curl_setopt($ch, CURLOPT_HEADER, 0); // return headers 0 no 1 yes
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // return page 1:yes
+        curl_setopt($ch, CURLOPT_TIMEOUT, 200); // http request timeout 20 seconds
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects, need this if the url changes
+        curl_setopt($ch, CURLOPT_MAXREDIRS, 2); //if http server gives redirection responce
+        curl_setopt($ch, CURLOPT_USERAGENT,
+            "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.7) Gecko/20070914 Firefox/2.0.0.7");
+        curl_setopt($ch, CURLOPT_COOKIEJAR, "cookies.txt"); // cookies storage / here the changes have been made
+        curl_setopt($ch, CURLOPT_COOKIEFILE, "cookies.txt");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // false for https
+        curl_setopt($ch, CURLOPT_ENCODING, "gzip"); // the page encoding
+
+        $data = curl_exec($ch); // execute the http request
+        curl_close($ch); // close the connection
+        print_r($data);
+
     }
 }
