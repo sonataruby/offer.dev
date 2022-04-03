@@ -163,7 +163,7 @@ class Clickoffer extends BaseController
         }else{
             $link = $data->link."&s1=".$data->click_id;
             $this->offer->updateTranfficInfo($id, ["runnumber" => "runnumber+1"]);
-            _go($link);
+            return _go($link);
         }
         exit();
     }
