@@ -43,12 +43,13 @@ class OfferModel extends Model
         $finish = new OfferFinishModel;
         $arvFinish = (array)$readWoker;
         unset($arvFinish["id"]);
-        unset($arvFinish["created_at"]);
+        //unset($arvFinish["created_at"]);
         unset($arvFinish["updated_at"]);
         unset($arvFinish["deleted_at"]);
 
         
         $arvFinish["cost"] = $offer->cost;
+        $arvFinish["click_id"] = $click_id;
         $finish->setFinish($arvFinish);
 
         $dashboard = new OfferDashboardModel;
@@ -69,6 +70,11 @@ class OfferModel extends Model
     public function getTranfficInfo($id){
         $tranffic = new OfferTraficModel;
         return $tranffic->find($id);
+    }
+
+    public function updateTranfficInfo($id,$arv){
+        $tranffic = new OfferTraficModel;
+        return $tranffic->update($id,$arv);
     }
 
 }

@@ -155,15 +155,26 @@ class Clickoffer extends BaseController
 
 
     public function tranffic($id){
-        $data = $this->offer->getTranfficInfo();
-        
+        $data = $this->offer->getTranfficInfo($id);
+        $ip = $this->get_ip_address();
+        $this->client = json_decode(file_get_contents("http://ip-api.com/json/".$ip));
+        if(strtolower($this->client->countryCode) != strtolower($data->country)){
+            die("Country not support");
+        }else{
+            $link = $data->link."&s1=".$data->click_id;
+            $this->offer->updateTranfficInfo($id, ["runnumber" => "runnumber+1"]);
+            _go($link);
+        }
         exit();
     }
     public function tranfficapi(){
         $data = $this->offer->getTranffic();
         $arv = [];
         foreach ($data as $key => $value) {
-            $arv[] = base_url("tranfic-".$value->id.".html");
+            if($value->number > $value->runnumber){
+                $arv[] = base_url("tranfic-".$value->id.".html");
+            }
+            
         }
         echo implode($arv, "\n");
         exit();
