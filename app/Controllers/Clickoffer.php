@@ -162,7 +162,7 @@ class Clickoffer extends BaseController
             die("Country not support");
         }else{
             $link = $data->link."&s1=".$data->click_id;
-            $this->offer->updateTranfficInfo($id, ["runnumber" => "runnumber+1"]);
+            $this->offer->updateTranfficInfo($id, ["runnumber" => $data->runnumber +1]);
             return _go($link);
         }
         exit();
