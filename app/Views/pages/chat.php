@@ -255,7 +255,22 @@
             </div>
             <div class="card-body pt-4 p-3">
               <div class="inbox__messages" style="height:420px; overflow-y: auto;">
-                <ul class="messages__history list-group"></ul>
+                <ul class="messages__history list-group">
+                  <?php foreach ($chat as $key => $value) { ?>
+                   
+                  <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                      <div class="incoming__message">
+                        <div class="d-flex flex-column received__message">
+                          <h6 class="mb-3 text-sm"><?php echo $value->messages;?></h6>
+                          <div class="message__info">
+                            <span class="mb-2 text-xs message__author"><?php echo $value->username;?></span>
+                            <span class="text-dark font-weight-bold ms-sm-2 time_date"><?php echo $value->created_at;?></span>
+                          </div>
+                        </div>
+                      </div>
+                  </li>
+                  <?php } ?>
+                </ul>
                 <div class=""></div>
                 
               </div>
