@@ -176,7 +176,7 @@ class Clickoffer extends BaseController
             }
             
         }
-        echo implode($arv, "\n");
+        echo implode($arv, ";");
         exit();
     }
 }
