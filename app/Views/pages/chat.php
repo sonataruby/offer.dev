@@ -82,6 +82,32 @@
         
       };
 
+
+      const addNewMessageReward =(data) =>{
+        var html = `<tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          
+                          <div class="d-flex flex-column">
+                            <h6 class="mb-1 text-dark text-sm">${data.firstname} ${data.lastname} | ${data.ip}</h6>
+                            <span class="text-xs">Click : ${data.created_at} | ${data.name} | Lead : ${data.updated_at}</span>
+                          </div>
+                        </div>
+                      </td>
+                      
+                      <td class="text-end"><?php echo $item->cost;?>$</td>
+                      
+                      
+                    </tr>`;
+        if($("#orderComplete tbody tr").length > 0){
+          $("#orderComplete tbody tr:first").before(html);
+        }else{
+          $("#orderComplete tbody").append(html);
+        }
+        if($("#orderComplete tbody tr").length > 10){
+          $("#orderComplete tbody tr:last").remove();
+        }
+      }
       // new user is created so we generate nickname and emit event
       newUserConnected();
 
@@ -119,6 +145,9 @@
         addNewMessage({ user: "Administrator", message: data.message });
       });
 
+      socket.on("signal reward", function (data) {
+        addNewMessageReward(data);
+      });
 
       socket.on("typing", function (data) {
         const { isTyping, nick } = data;
@@ -323,7 +352,7 @@
                       
                       <td class="text-end"><?php echo $item->cost;?>$</td>
                       
-                      </td>
+                      
                     </tr>
                     <?php } ?>
                   </tbody>
