@@ -329,6 +329,7 @@
                 <th>Name</th>
                 <th>Cost</th>
                 <th>Device</th>
+                <th>Country</th>
                 <th>Link</th>
                 <th>Lead</th>
                 <th></th>
@@ -338,11 +339,15 @@
                   
                 <tr>
                   <td><?php echo $value->id;?></td>
-                  <td><?php echo $value->name;?></td>
+                  <td><h6 class="mb-1 text-dark text-sm"><?php echo $value->name;?></h6>
+                    
+                    <span class="text-xs"><?php echo $item->description;?></span>
+                  </td>
                   <td><?php echo $value->cost;?></td>
                   <td><?php echo $value->device;?></td>
-                  <td>
-                    <div class="input-group mb-3">
+                  <td><?php echo $value->country;?></td>
+                  <td style="padding-right: 10px;">
+                    <div class="input-group">
                       <input type="text" class="form-control" readonly value="<?php echo base_url("click-".$value->id."-".user_id().".html");?>">
                       <button class="btn btn-outline-secondary" type="button" id="button-addon2">Copy</button>
                     </div>
