@@ -37,6 +37,7 @@ $routes->get('click-(:num)-(:num).html', 'Clickoffer::index/$1/$2');
 $routes->get('tranffic-(:num).html', 'Clickoffer::tranffic/$1');
 
 $routes->get('postback/(:any)/(:any)/(:any)', 'Clickoffer::postback/$1/$2');
+$routes->get('postback/(:any)/(:any)', 'Clickoffer::postback/$1/$2');
 $routes->get('admin/users', 'UserController::index', ['filter' => 'permission:manage-user']);
 $routes->get('admin/users', 'UserController::index', ['filter' => 'role:admin,superadmin']);
 //$routes->get('/assets/(:any)','Views/assets/$1');
