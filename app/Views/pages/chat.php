@@ -387,7 +387,7 @@
                   <td><?php echo $value->id;?></td>
                   <td><h6 class="mb-1 text-dark text-sm"><?php echo $value->name;?></h6>
                     
-                    <span class="text-xs"><?php echo $item->description;?></span>
+                    <span class="text-xs"><?php echo $value->description;?></span>
                   </td>
                   <td><?php echo $value->cost;?></td>
                   <td><?php echo $value->device;?></td>
