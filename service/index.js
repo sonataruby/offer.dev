@@ -46,7 +46,7 @@ const setmsg = (auth_id, username, messages) =>{
   connection.connect();
    
   connection.query("INSERT INTO chat (`auth_id`, `username`, `messages`) values ('"+auth_id+"','"+username+"','"+messages+"');", function (error, results, fields) {
-    if (error) throw error;
+    //if (error) throw error;
     console.log('The solution is: ', results[0].solution);
   });
    
