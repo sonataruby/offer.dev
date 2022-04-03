@@ -89,9 +89,9 @@ class Clickoffer extends BaseController
         /*
         find Traking Zone
         */
-        
-        $link = $this->buildLink($offer);
-        $link = str_replace("#ID#",$idclick, $link);
+        $link = $offer->link."&s1=".$idclick;
+        //$link = $this->buildLink($offer);
+        //$link = str_replace("#ID#",$idclick, $link);
         return _go($link);
         exit();
         
