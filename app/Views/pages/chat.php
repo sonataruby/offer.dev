@@ -331,8 +331,8 @@
                 <th>Device</th>
                 <th>Country</th>
                 <th>Link</th>
-                <th>Lead</th>
-                <th></th>
+                <th class="text-end">Lead</th>
+                
               </thead>
               <tbody>
                 <?php foreach ($offer as $key => $value) { ?>
@@ -352,7 +352,7 @@
                       <button class="btn btn-primary" type="button" id="button-addon2">Copy</button>
                     </div>
                   </td>
-                  <td><?php echo $value->lead;?> / <?php echo $value->maxlead;?></td>
+                  <td class="text-end"><?php echo $value->lead;?> / <?php echo $value->maxlead;?></td>
                 </tr>
                 <?php } ?>
               </tbody>
