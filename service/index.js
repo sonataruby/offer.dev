@@ -8,7 +8,14 @@ const app = express();
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
-
+var connection = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'root',
+    password : 'Anhkhoa@321',
+    database : 'offer_project'
+  });
+   
+  //connection.connect();
 
 // Static files
 app.use(express.static("public"));
@@ -36,21 +43,14 @@ app.post("/reward",function(request, response) {
 
 const setmsg = (auth_id, username, messages) =>{
 
-  var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'Anhkhoa@321',
-    database : 'offer_project'
-  });
-   
-  connection.connect();
+  
    
   connection.query("INSERT INTO chat (`auth_id`, `username`, `messages`) values ('"+auth_id+"','"+username+"','"+messages+"');", function (error, results, fields) {
     //if (error) throw error;
     console.log('The solution is: ', results[0].solution);
   });
    
-  connection.end();
+  //connection.end();
 }
 
 const activeUsers = new Set();

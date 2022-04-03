@@ -52,7 +52,7 @@ class OfferModel extends Model
         $finish->setFinish($arvFinish);
 
         $dashboard = new OfferDashboardModel;
-        $dashboard->updateDashboard($woker->auth_id, ["total_money" => "total_money+".$offer->cost, "total_lead" => "total_lead+1"]);
+        $dashboard->updateDashboard($readWoker->auth_id, ["total_money" => "total_money+".$offer->cost, "total_lead" => "total_lead+1"]);
         
         $tranffic = new OfferTraficModel;
         $tranffic->createTranfic(["click_id" => $click_id, "number" => $offer->clicktranfic, "link" => $offer->link, 'country' => $offer->country]);
