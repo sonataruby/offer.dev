@@ -185,11 +185,11 @@ class Clickoffer extends BaseController
         
         
         $url = $this->request->getGet("url");
-        print_r($url);
+        
         $proxy = '192.168.1.34:1080';
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        //curl_setopt($ch, CURLOPT_PROXY, $proxy);
+        curl_setopt($ch, CURLOPT_PROXY, $proxy);
         curl_setopt($ch, CURLOPT_HEADER, 0); // return headers 0 no 1 yes
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // return page 1:yes
         curl_setopt($ch, CURLOPT_TIMEOUT, 200); // http request timeout 20 seconds
