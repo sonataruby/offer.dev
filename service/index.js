@@ -39,7 +39,7 @@ const setmsg = (auth_id, username, messages) =>{
   var connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : 'root',
+    password : 'Anhkhoa@321',
     database : 'offer_project'
   });
    
@@ -70,7 +70,8 @@ io.on("connection", function (socket) {
   });
 
   socket.on("chat message", function (data) {
-    setmsg(data.id, data.username, data.msg);
+    console.log(data);
+    setmsg(data.id, data.username, data.message);
     io.emit("chat message", data);
   });
   
