@@ -94,7 +94,7 @@
         socket.emit("chat message", {
           message: inputField.value,
           id: <?php echo user_id();?>,
-          username: <?php echo user()->username;?>
+          username: "<?php echo user()->username;?>"
         });
 
         inputField.value = "";
