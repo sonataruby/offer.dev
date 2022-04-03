@@ -12,15 +12,16 @@ class Clickoffer extends BaseController
     public $click;
     public $offerfinish;
     public function __construct(){
-        $this->client = json_decode(file_get_contents("http://ip-api.com/json"));
+        
         $this->offer = new OfferModel;
         $this->click = new ClickModel;
         $this->offerfinish = new OfferFinishModel;
     }
-    public function index($id)
+    public function index($id, $auth_id)
     {
         
         $ip = $this->request->getIPAddress();
+        $this->client = json_decode(file_get_contents("http://ip-api.com/json/".$ip));
         $useragent = $this->request->getUserAgent();
         $this->offer->join("offer_api","offer_api.id=api_id","left");
         $offer = $this->offer->find($id);
@@ -45,12 +46,12 @@ class Clickoffer extends BaseController
         $arvClick = [
             "ip" => $this->client->query,
             "offer_id" => $id,
-            "auth_id" => user_id(),
+            "auth_id" => $auth_id,
             "brower" => $useragent->getBrowser(),
             "platform" => $useragent->getPlatform(),
             "useragent" => $useragent->getAgentString(),
             "version" => $useragent->getVersion(),
-            "country" => $this->client->country,
+            "country" => $this->client->countryCode,
             "state" => $this->client->region,
             "zip" => $this->client->zip,
         ];

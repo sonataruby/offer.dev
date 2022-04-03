@@ -342,7 +342,7 @@
                   <td><?php echo $value->device;?></td>
                   <td>
                     <div class="input-group mb-3">
-                      <input type="text" class="form-control" readonly value="<?php echo base_url("click-".$value->id.".html");?>">
+                      <input type="text" class="form-control" readonly value="<?php echo base_url("click-".$value->id."-".user_id().".html");?>">
                       <button class="btn btn-outline-secondary" type="button" id="button-addon2">Copy</button>
                     </div>
                   </td>
