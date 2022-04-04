@@ -2,7 +2,22 @@
 <?= $this->section('main') ?>
     <?= $this->section('javascript') ?>
 
-    
+      <script type="text/javascript">
+        $(".check").on("click", function(){
+            var ip = $(this).attr("data-ip");
+            var country = $(this).parent().parent().find(".country");
+            var state = $(this).parent().parent().find(".state");
+            var zip = $(this).parent().parent().find(".zip");
+            axios.get("http://ip-api.com/json/"+ip).then((item) => {
+                var data = item.data;
+                country.text(data.countryCode);
+                state.text(data.region);
+                zip.text(data.zip);
+                //$("#tablesignal tbody tr").eq(i).find("td").eq(3).text(item.country);
+            });
+        });
+        
+      </script>
     <?= $this->endSection() ?>
 
 
@@ -129,15 +144,28 @@
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">IP</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Port</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Country</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">State</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Zip</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Port</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Type</th>
                       <th class="text-secondary opacity-7"></th>
                     </tr>
                   </thead>
+
                   <tbody>
-                    
+                    <?php foreach ($ip as $key => $value) { ?>
+                      <tr>
+                        <td class="tdip"><?php echo $value->ip;?></td>
+                        <td><?php echo $value->port;?></td>
+                        <td class="country"></td>
+                        <td class="state"></td>
+                        <td class="zip"></td>
+                       
+                        <td><?php echo $value->type;?></td>
+                        <td><button class="btn btn-sm btn-info check" data-ip="<?php echo $value->ip;?>">Check</button></td>
+                      </tr>
+                    <?php }  ?>
                   </tbody>
                 </table>
               </div>
