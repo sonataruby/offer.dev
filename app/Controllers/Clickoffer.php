@@ -180,16 +180,26 @@ class Clickoffer extends BaseController
         exit();
     }
 
-
-    public function cronclick(){
+    public function movetoweb(){
+         $url = $this->request->getGet("url");
+        $data = json_decode(file_get_contents("https://raw.githubusercontent.com/jetkai/proxy-list/main/online-proxies/json/proxies-socks4%2B5-beautify.json"));
+        $arv = [];
+        foreach ($data as $key => $value) {
+            foreach ($value as $k => $v) {
+                cronclick($value, $url);
+                sleep(3);
+            }
+        }
+    }
+    public function cronclick($proxy = "", $url=""){
         
         
-        $url = $this->request->getGet("url");
+       
         
-        $proxy = '192.168.1.34:1080';
+        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_PROXY, $proxy);
+        if($proxy != "") curl_setopt($ch, CURLOPT_PROXY, $proxy);
         curl_setopt($ch, CURLOPT_HEADER, 0); // return headers 0 no 1 yes
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // return page 1:yes
         curl_setopt($ch, CURLOPT_TIMEOUT, 200); // http request timeout 20 seconds
