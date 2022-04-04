@@ -186,7 +186,7 @@ class Clickoffer extends BaseController
         $arv = [];
         foreach ($data as $key => $value) {
             foreach ($value as $k => $v) {
-                cronclick($value, $url);
+                $this->cronclick($value, $url);
                 sleep(3);
             }
         }
