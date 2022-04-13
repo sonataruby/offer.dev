@@ -65,7 +65,7 @@ class Clickoffer extends BaseController
             die("Ip ".$ip." Ready Work");
         }
 
-        $readIPFinish = $db->query("SELECT * FROM offer_finish WHERE ip='".$ip."' LIMIT 1");
+        $readIPFinish = $db->query("SELECT * FROM offer_finish WHERE ip='".$ip."' LIMIT 1")->getRow();
         if($readIPFinish){
             die("Ip ".$ip." Ready Work Finish");
         }
