@@ -39,6 +39,10 @@ class OfferFinishModel extends Model
     }
 
     public function setFinish($arv){
-        $this->insert($arv);
+        $click_id = $arv["click_id"];
+        $db = db_connect();
+        $read = $db->query("SELECT * FROM offer_finish WHERE click_id ='".$click_id."' LIMIT 1")->getRow();
+
+        if(!$read) $this->insert($arv);
     }
 }

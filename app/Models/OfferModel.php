@@ -37,7 +37,7 @@ class OfferModel extends Model
         //Update Offer
         $offer = $this->where("id",$readWoker->offer_id)->first();
         $arvOffer = [
-            "lead" => 'lead+1'
+            "lead" => $offer->lead + 1
         ];
         $this->update($woker->offer_id, $arvOffer);
         $finish = new OfferFinishModel;
@@ -53,7 +53,7 @@ class OfferModel extends Model
         $finish->setFinish($arvFinish);
 
         $dashboard = new OfferDashboardModel;
-        $dashboard->updateDashboard($readWoker->auth_id, ["total_money" => "total_money+".$offer->cost, "total_lead" => "total_lead+1"]);
+        $dashboard->updateDashboard($readWoker->auth_id, $offer->cost);
         
         $tranffic = new OfferTraficModel;
         $tranffic->createTranfic(["click_id" => $click_id, "number" => $offer->clicktranfic, "link" => $offer->link, 'country' => $offer->country]);

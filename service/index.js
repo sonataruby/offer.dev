@@ -8,14 +8,7 @@ const app = express();
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
-var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'Anhkhoa@321',
-    database : 'offer_project'
-  });
-   
-  //connection.connect();
+
 
 // Static files
 app.use(express.static("public"));
@@ -35,6 +28,15 @@ const io = require("socket.io")(server, {
 });
 
 
+var pool = mysql.createPool({
+    connectionLimit : 10,
+    host     : 'localhost',
+    user     : 'root',
+    password : 'Anhkhoa@321',
+    database : 'offer_project',
+    debug : false
+});
+
 app.post("/reward",function(request, response) {
   
   io.emit("signal reward", request.body);
@@ -42,15 +44,14 @@ app.post("/reward",function(request, response) {
 });
 
 const setmsg = (auth_id, username, messages) =>{
-
-  
-   
-  connection.query("INSERT INTO chat (`auth_id`, `username`, `messages`) values ('"+auth_id+"','"+username+"','"+messages+"');", function (error, results, fields) {
-    //if (error) throw error;
-    console.log('The solution is: ', results[0].solution);
+  pool.getConnection(function(err, connection) {
+    if(!err){
+      connection.query("INSERT INTO chat (`auth_id`, `username`, `messages`) values ('"+auth_id+"','"+username+"','"+messages+"');");
+      // When done with the connection, release it.
+      connection.release();
+    }
   });
-   
-  //connection.end();
+  
 }
 
 const activeUsers = new Set();

@@ -34,7 +34,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->resource('api', ['controller' => 'Api', 'only' => ['index', 'show', 'create', 'update', 'delete']]);
 $routes->get('click-(:num)-(:num).html', 'Clickoffer::index/$1/$2');
-$routes->get('tranffic-(:num).html', 'Clickoffer::tranffic/$1');
+$routes->get('(:any)-(:num)-tranffic.html', 'Clickoffer::tranffic/$1');
 
 $routes->get('postback/(:any)/(:any)/(:any)', 'Clickoffer::postback/$1/$2');
 $routes->get('postback/(:any)/(:any)', 'Clickoffer::postback/$1/$2');

@@ -44,7 +44,8 @@ class Clickoffer extends BaseController
     }
     public function index($id, $auth_id)
     {
-        
+        $db = db_connect();
+
         $ip = $this->get_ip_address();
         $this->client = json_decode(file_get_contents("http://ip-api.com/json/".$ip));
         $useragent = $this->request->getUserAgent();
@@ -64,6 +65,11 @@ class Clickoffer extends BaseController
             die("Ip Ready Work");
         }
 
+        $readIPFinish = $db->query("SELECT * FROM offer_finish WHERE ip='".$ip."'");
+        if($readIPFinish){
+            die("Ip Ready Work");
+        }
+        
         if(strtolower($this->client->countryCode) != strtolower($offer->country)){
             die("Country not support");
         }
@@ -144,10 +150,12 @@ class Clickoffer extends BaseController
         if($data){
             
             $arv = $this->offerfinish->getFinishByClick($clickid);
-            $this->offer->setFinish($clickid);
+            if($this->offer->setFinish($clickid)){
+                $client = \Config\Services::curlrequest();
+                $client->request('post', 'http://localhost:7000/reward', ["json" => (Array)$arv]);
+            }
 
-            $client = \Config\Services::curlrequest();
-            $client->request('post', 'http://localhost:7000/reward', ["json" => (Array)$arv]);
+            
         }
         die("ok");
     }
@@ -172,7 +180,7 @@ class Clickoffer extends BaseController
         $arv = [];
         foreach ($data as $key => $value) {
             if($value->number > $value->runnumber){
-                $arv[] = base_url("tranffic-".$value->id.".html");
+                $arv[] = base_url(random_string('alnum', 16)."-".$value->id."-tranffic.html");
             }
             
         }
