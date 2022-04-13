@@ -62,14 +62,14 @@ class Clickoffer extends BaseController
         $this->click->where(["offer_id" => $id, "ip" => $ip]);
         $readClick = $this->click->find();
         if($readClick){
-            die("Ip Ready Work");
+            die("Ip ".$ip." Ready Work");
         }
 
-        $readIPFinish = $db->query("SELECT * FROM offer_finish WHERE ip='".$ip."'");
+        $readIPFinish = $db->query("SELECT * FROM offer_finish WHERE ip='".$ip."' LIMIT 1");
         if($readIPFinish){
-            die("Ip Ready Work");
+            die("Ip ".$ip." Ready Work Finish");
         }
-        
+
         if(strtolower($this->client->countryCode) != strtolower($offer->country)){
             die("Country not support");
         }
