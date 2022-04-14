@@ -143,7 +143,14 @@ class Clickoffer extends BaseController
 
     /*Set Post back*/
 
-    public function postback($offer_id,$clickid){
+    public function postback($token){
+
+        if($token != "smarttoken") die("error token");
+
+        $offer_id = $this->request->getGet("offer");
+        $clickid = $this->request->getGet("task");
+        $ip = $this->request->getGet("ip");
+
         $this->click->join("offer","offer.id=offer_id","left");
         $this->click->join("users","users.id=auth_id","left");
         $data = $this->click->find($clickid);
