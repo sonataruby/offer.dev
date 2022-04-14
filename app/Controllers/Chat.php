@@ -43,3 +43,4 @@ class Chat extends BaseController
        $this->chat->setMessages($data->id, $data->username, $data->msg);
     }
 }
+ 
