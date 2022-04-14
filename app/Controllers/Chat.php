@@ -22,6 +22,7 @@ class Chat extends BaseController
         {
             return redirect()->route('login');
         }
+        $db = db_connect();
         $offer = $this->db->findAll();
         $finish = $this->offer_finish->getFinish();
         $chat = $this->chat->getMessages();
@@ -32,7 +33,7 @@ class Chat extends BaseController
             $value->lead_number = $read->lead_number;
             $arvOffer[] = $value;
         }
-        $db = db_connect();
+        
         $report = $db->query("select * from offer_dashboard where auth_id='".user_id()."'")->getRow();
 
         return view('pages/chat',["offer" => $arvOffer, "report" => $report, "finish" => $finish, "chat" => $chat, "header" => $this->getHeader(["title" => "Lead Offer"])]);
