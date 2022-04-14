@@ -28,7 +28,7 @@ class OfferModel extends Model
 
     public function updateClick($id){
         $db = db_connect();
-        $read = $db->query("select * from offer_lead where offer_id='"+$id+"' and lead_day='".date("Y-m-d",now())."'")->getRow();
+        $read = $db->query("select * from offer_lead where offer_id='".$id."' and lead_day='".date("Y-m-d",now())."'")->getRow();
         if($read){
             $db->query("update offer_lead SET click_number='".($read->click_number + 1)."' WHERE id='".$read->id."'");
         }else{
