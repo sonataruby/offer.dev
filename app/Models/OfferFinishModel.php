@@ -42,13 +42,15 @@ class OfferFinishModel extends Model
         $click_id = $arv["click_id"];
         $db = db_connect();
         $read = $db->query("SELECT * FROM offer_finish WHERE click_id ='".$click_id."' LIMIT 1")->getRow();
-        $lead_id = $db->query("SELECT * FROM offer_lead WHERE lead_day='".date("Y-m-d",now())."' and offer_id='".$read->offer_id."'")->getRow();
+        $lead_id = $db->query("SELECT * FROM offer_lead WHERE lead_day='".date("Y-m-d",now())."' and offer_id='".$arv["offer_id"]."'")->getRow();
         if($lead_id){
             $db->query("update offer_lead set lead_number='".($lead_id->lead_number + 1)."' WHERE id='".$lead_id->id."'");
         }else{
-            $db->query("insert into offer_lead set lead_number='1', lead_day='".date("Y-m-d",now())."', offer_id='".$read->offer_id."'");
+            $db->query("insert into offer_lead set lead_number='1', lead_day='".date("Y-m-d",now())."', offer_id='".$arv["offer_id"]."'");
         }
         
-        if(!$read) $this->insert($arv);
+        if(!$read) {
+            $this->insert($arv);
+        }
     }
 }
