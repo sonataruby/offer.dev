@@ -90,7 +90,7 @@ class Clickoffer extends BaseController
        
 
         if($idclick > 0){
-            $this->offer->updateClick($id,$offer->click + 1);
+            $this->offer->updateClick($offer->id);
         }
         /*
         find Traking Zone
@@ -173,7 +173,7 @@ class Clickoffer extends BaseController
         $data = $this->offer->getTranfficInfo($id);
         $ip = $this->get_ip_address();
         $this->client = json_decode(file_get_contents("http://ip-api.com/json/".$ip));
-        
+
         if(strtolower($this->client->countryCode) != strtolower($data->country)){
             print_r($data);
             die("Country not support : ".$ip);

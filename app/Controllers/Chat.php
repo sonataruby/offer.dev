@@ -25,7 +25,14 @@ class Chat extends BaseController
         $offer = $this->db->findAll();
         $finish = $this->offer_finish->getFinish();
         $chat = $this->chat->getMessages();
-        return view('pages/chat',["offer" => $offer, "finish" => $finish, "chat" => $chat, "header" => $this->getHeader(["title" => "Lead Offer"])]);
+        $arvOffer = [];
+        foreach ($offer as $key => $value) {
+            $read = $db->query("select * from offer_lead where offer_id='"+$value->id+"' and lead_day='".date("Y-m-d",now())."'")->getRow();
+            $value->click_number = $read->click_number;
+            $value->lead_number = $read->lead_number;
+            $arvOffer[] = $value;
+        }
+        return view('pages/chat',["offer" => $arvOffer, "finish" => $finish, "chat" => $chat, "header" => $this->getHeader(["title" => "Lead Offer"])]);
     }
 
     public function savechat(){
