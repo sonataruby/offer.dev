@@ -151,13 +151,28 @@ class Clickoffer extends BaseController
         $clickid = $this->request->getGet("task");
         $ip = $this->request->getGet("ip");
 
-        $this->click->join("offer","offer.id=offer_id","left");
-        $this->click->join("users","users.id=auth_id","left");
-        $data = $this->click->find($clickid);
+        //$this->click->join("offer","offer.id=offer_id","left");
+        //$this->click->join("users","users.id=auth_id","left");
+        //$data = $this->click->find($clickid);
+        $db = db_connect();
+        $data = $db->query("select * from offer_worker where id='".$clickid."'")->getRow();
+
         if($data){
             
-            $arv = $this->offerfinish->getFinishByClick($clickid);
+
+            //$arv = $this->offerfinish->getFinishByClick($clickid);
             if($this->offer->setFinish($clickid)){
+                $user = $db->query("select * from users_profile where auth_id='".$data->auth_id."'")->getRow();
+                $offer = $db->query("select * from offer where offer_id='".$data->offer_id."'")->getRow();
+                $finish = $db->query("select * from offer_finish where click_id='".$clickid."'")->getRow();
+                $arv = [
+                    "username" => $user->firstname." ".$user->lastname,
+                    "ip" => $finish->ip,
+                    "start" => $finish->created_at,
+                    "lead" => $finish->updated_at,
+                    "price" => $finish->cost,
+                    "name" => $offer->name
+                ];
                 $client = \Config\Services::curlrequest();
                 $client->request('post', 'http://localhost:7000/reward', ["json" => (Array)$arv]);
             }

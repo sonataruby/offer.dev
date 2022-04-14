@@ -90,13 +90,13 @@
                         <div class="d-flex align-items-center">
                           
                           <div class="d-flex flex-column">
-                            <h6 class="mb-1 text-dark text-sm">${data.firstname} ${data.lastname} | ${data.ip}</h6>
-                            <span class="text-xs">Click : ${data.created_at} | ${data.name} | Lead : ${data.updated_at}</span>
+                            <h6 class="mb-1 text-dark text-sm">${data.username} | ${data.ip}</h6>
+                            <span class="text-xs">Click : ${data.start} | ${data.name} | Lead : ${data.lead}</span>
                           </div>
                         </div>
                       </td>
                       
-                      <td class="text-end"><?php echo $item->cost;?>$</td>
+                      <td class="text-end">${data.price} $</td>
                       
                       
                     </tr>`;
@@ -108,6 +108,7 @@
         if($("#orderComplete tbody tr").length > 10){
           $("#orderComplete tbody tr:last").remove();
         }
+        console.log(data);
       }
       // new user is created so we generate nickname and emit event
       newUserConnected();
