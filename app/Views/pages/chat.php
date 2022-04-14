@@ -202,10 +202,10 @@
                       </div>
                     </div>
                     <div class="card-body pt-0 p-3 text-center">
-                      <h6 class="text-center mb-0">Offer</h6>
-                      <span class="text-xs">Offer Number</span>
+                      <h6 class="text-center mb-0">Lead</h6>
+                      <span class="text-xs">Lead Number</span>
                       <hr class="horizontal dark my-3">
-                      <h5 class="mb-0">+2000</h5>
+                      <h5 class="mb-0"><?php echo $report->total_lead;?></h5>
                     </div>
                   </div>
                 </div>
@@ -220,7 +220,7 @@
                       <h6 class="text-center mb-0">Total</h6>
                       <span class="text-xs">Total Work</span>
                       <hr class="horizontal dark my-3">
-                      <h5 class="mb-0">$455.00</h5>
+                      <h5 class="mb-0">$<?php echo $report->total_money;?></h5>
                     </div>
                   </div>
                 </div>
@@ -325,7 +325,7 @@
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
                   <i class="far fa-calendar-alt me-2"></i>
-                  <small>23 - 30 March 2020</small>
+                  <small><?php echo date("Y-m-d",now());?></small>
                 </div>
               </div>
             </div>
@@ -373,10 +373,11 @@
               <thead>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Cost</th>
+                <th>Price</th>
                 <th>Device</th>
                 <th>Country</th>
                 <th>Link</th>
+                <th>Click</th>
                 <th class="text-end">Lead</th>
                 
               </thead>
@@ -398,7 +399,8 @@
                       <button class="btn btn-primary" type="button" id="button-addon2">Copy</button>
                     </div>
                   </td>
-                  <td class="text-end"><?php echo $value->lead;?> / <?php echo $value->maxlead;?></td>
+                  <td><?php echo $value->click_number;?></td>
+                  <td class="text-end"><?php echo $value->lead_number;?> / <?php echo $value->maxlead;?></td>
                 </tr>
                 <?php } ?>
               </tbody>
