@@ -28,7 +28,7 @@ class Chat extends BaseController
         $chat = $this->chat->getMessages();
         $arvOffer = [];
         foreach ($offer as $key => $value) {
-            $read = $db->query("select * from offer_lead where offer_id='"+$value->id+"' and lead_day='".date("Y-m-d",now())."'")->getRow();
+            $read = $db->query("select * from offer_lead where offer_id='".$value->id."' and lead_day='".date("Y-m-d",now())."'")->getRow();
             
             $v = (Array)$value;
             $v["click_number"] = $read->click_number;
