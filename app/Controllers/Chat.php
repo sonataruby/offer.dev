@@ -29,9 +29,11 @@ class Chat extends BaseController
         $arvOffer = [];
         foreach ($offer as $key => $value) {
             $read = $db->query("select * from offer_lead where offer_id='"+$value->id+"' and lead_day='".date("Y-m-d",now())."'")->getRow();
-            $value->click_number = $read->click_number;
-            $value->lead_number = $read->lead_number;
-            $arvOffer[] = $value;
+            
+            $v = (Array)$value;
+            $v["click_number"] = $read->click_number;
+            $v["lead_number"] = $read->lead_number;
+            $arvOffer[] = (Object)$v;
         }
         
         $report = $db->query("select * from offer_dashboard where auth_id='".user_id()."'")->getRow();
