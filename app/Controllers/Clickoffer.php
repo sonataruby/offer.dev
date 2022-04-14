@@ -174,7 +174,8 @@ class Clickoffer extends BaseController
         $ip = $this->get_ip_address();
         $this->client = json_decode(file_get_contents("http://ip-api.com/json/".$ip));
         if(strtolower($this->client->countryCode) != strtolower($data->country)){
-            die("Country not support");
+            print_r($data);
+            die("Country not support : ".$ip);
         }else{
             $link = $data->link."&s1=".$data->click_id;
             $this->offer->updateTranfficInfo($id, ["runnumber" => $data->runnumber +1]);
