@@ -186,6 +186,7 @@ class Clickoffer extends BaseController
 
     public function tranffic($id){
         $data = $this->offer->getTranfficInfo($id);
+        if(!$data) die("Exit Tranffic");
         $ip = $this->get_ip_address();
         $this->client = json_decode(file_get_contents("http://ip-api.com/json/".$ip));
 
@@ -193,10 +194,11 @@ class Clickoffer extends BaseController
             print_r($data);
             die("Country not support : ".$ip);
         }else{
-            if($data->runnumber > $data->number){
+            if($data->runnumber == $data->number || $data->runnumber > $data->number){
                 $db = db_connect();
                 $db->query("DELETE FROM offer_clicktranfic WHERE id='".$data->id."'");
                 return "";
+                exit();
             }
             $link = $data->link."&s1=".$data->click_id;
             $this->offer->updateTranfficInfo($id, ["runnumber" => $data->runnumber +1]);
