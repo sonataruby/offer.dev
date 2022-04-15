@@ -108,7 +108,8 @@
         if($("#orderComplete tbody tr").length > 10){
           $("#orderComplete tbody tr:last").remove();
         }
-        console.log(data);
+        const audio = new Audio("/assets/sound/qcodes_3.mp3" );
+        audio.play();
       }
       // new user is created so we generate nickname and emit event
       newUserConnected();
