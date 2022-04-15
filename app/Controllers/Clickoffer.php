@@ -163,7 +163,7 @@ class Clickoffer extends BaseController
             //$arv = $this->offerfinish->getFinishByClick($clickid);
             if($this->offer->setFinish($clickid)){
                 $user = $db->query("select * from users_profile where user_id='".$data->auth_id."'")->getRow();
-                $offer = $db->query("select * from offer where offer_id='".$data->offer_id."'")->getRow();
+                $offer = $db->query("select * from offer where id='".$data->offer_id."'")->getRow();
                 $finish = $db->query("select * from offer_finish where click_id='".$clickid."'")->getRow();
                 $arv = [
                     "username" => $user->firstname." ".$user->lastname,
