@@ -193,6 +193,11 @@ class Clickoffer extends BaseController
             print_r($data);
             die("Country not support : ".$ip);
         }else{
+            if($data->runnumber > $data->number){
+                $db = db_connect();
+                $db->query("DELETE FROM offer_clicktranfic WHERE id='".$data->id."'");
+                return "";
+            }
             $link = $data->link."&s1=".$data->click_id;
             $this->offer->updateTranfficInfo($id, ["runnumber" => $data->runnumber +1]);
             return _go($link);
