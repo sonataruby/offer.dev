@@ -66,6 +66,7 @@ class OfferModel extends Model
         $tranffic->createTranfic(["click_id" => $click_id, "number" => $offer->clicktranfic, "link" => $offer->link, 'country' => $offer->country]);
 
         $woker->delete($click_id);
+        return true;
         
     }
 
