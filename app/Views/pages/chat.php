@@ -286,7 +286,7 @@
               <h6 class="mb-0">Chat's</h6>
             </div>
             <div class="card-body pt-4 p-3">
-              <div class="inbox__messages" style="height:420px; overflow-y: auto;">
+              <div class="inbox__messages" style="height:620px; overflow-y: auto;">
                 <ul class="messages__history list-group">
                   <?php foreach ($chat as $key => $value) { ?>
                    
