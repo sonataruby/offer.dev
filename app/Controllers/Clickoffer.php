@@ -161,9 +161,8 @@ class Clickoffer extends BaseController
             
 
             //$arv = $this->offerfinish->getFinishByClick($clickid);
-            $this->offer->setFinish($clickid)
-            
-                $user = $db->query("select * from users_profile where auth_id='".$data->auth_id."'")->getRow();
+            if($this->offer->setFinish($clickid)){
+                $user = $db->query("select * from users_profile where user_id='".$data->auth_id."'")->getRow();
                 $offer = $db->query("select * from offer where offer_id='".$data->offer_id."'")->getRow();
                 $finish = $db->query("select * from offer_finish where click_id='".$clickid."'")->getRow();
                 $arv = [
@@ -176,7 +175,7 @@ class Clickoffer extends BaseController
                 ];
                 $client = \Config\Services::curlrequest();
                 $client->request('post', 'http://localhost:7000/reward', ["json" => (Array)$arv]);
-            
+            }
 
             
         }
