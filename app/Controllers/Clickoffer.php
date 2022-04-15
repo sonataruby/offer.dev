@@ -90,7 +90,7 @@ class Clickoffer extends BaseController
        
 
         if($idclick > 0){
-            $this->offer->updateClick($offer->id);
+            $this->offer->updateClick($id);
         }
         /*
         find Traking Zone
