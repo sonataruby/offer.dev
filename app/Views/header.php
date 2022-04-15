@@ -45,32 +45,6 @@
   <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="/assets/css/dashboard.css?v=2.0.2" rel="stylesheet" />
-  <script src="/assets/js/jquery.js?v=2.0.2"></script>
-  <script src="/assets/js/core/popper.min.js"></script>
-  <script src="/assets/js/core/bootstrap.min.js"></script>
-  <script src="/assets/js/moment.js?v=2.0.2"></script>
-  <script src="/assets/js/axios.js?v=2.0.2"></script>
-  <?php 
-  if(is_array($js)){
-      foreach($js as $javascript){
-        ?>
-        <script src="<?php echo $javascript;?>"></script>
-        <?php
-      }
-  }
-  ?>
-  <?php 
-  if(is_array($css)){
-      foreach($css as $style){
-        ?>
-        <link href="<?php echo $style;?>" rel="stylesheet"></script>
-        <?php
-      }
-  }
-  ?>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4099957745291159" crossorigin="anonymous"></script>
-
-<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/be3bc6006513d53e05e195918/edc0c2d1c306b9ab9acf31a77.js");</script>
-</head>
+  
 
 <body class="g-sidenav-show   bg-gray-100">

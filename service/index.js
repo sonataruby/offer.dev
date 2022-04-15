@@ -38,7 +38,7 @@ var pool = mysql.createPool({
 });
 
 app.post("/reward",function(request, response) {
-  
+  console.log(request.body);
   io.emit("signal reward", request.body);
   response.send("ok");
 });
@@ -71,7 +71,7 @@ io.on("connection", function (socket) {
   });
 
   socket.on("chat message", function (data) {
-    console.log(data);
+    
     setmsg(data.id, data.username, data.message);
     io.emit("chat message", data);
   });

@@ -36,6 +36,30 @@
     <!-- End Navbar -->
     <?= $this->renderSection('main') ?>
   </main>
+  <script src="/assets/js/jquery.js?v=2.0.2"></script>
+  <script src="/assets/js/core/popper.min.js"></script>
+  <script src="/assets/js/core/bootstrap.min.js"></script>
+  <script src="/assets/js/moment.js?v=2.0.2"></script>
+  <script src="/assets/js/axios.js?v=2.0.2"></script>
+  <?php 
+  if(is_array($js)){
+      foreach($js as $javascript){
+        ?>
+        <script src="<?php echo $javascript;?>"></script>
+        <?php
+      }
+  }
+  ?>
+  <?php 
+  if(is_array($css)){
+      foreach($css as $style){
+        ?>
+        <link href="<?php echo $style;?>" rel="stylesheet"></script>
+        <?php
+      }
+  }
+  ?>
+
  <?= $this->renderSection('javascript') ?>
  <?= $this->renderSection('style') ?>
  <?php echo view('footer',is_array($footer) ? $footer : []); ?>
