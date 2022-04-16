@@ -348,8 +348,8 @@
                         <div class="d-flex align-items-center">
                           
                           <div class="d-flex flex-column">
-                            <h6 class="mb-1 text-dark text-sm"><?php echo $item->firstname;?> <?php echo $item->lastname;?> | <?php echo strtoupper($item->ip);?></h6>
-                            <span class="text-xs">Click : <?php echo date("d-m h:i A",$item->created_at);?> | <?php echo $item->name;?> | Lead : <?php echo date("h:i A",$item->updated_at);?></span>
+                            <h6 class="mb-1 text-dark text-sm"><b class="text-<?php echo $item->auth_id == user_id() ? "primary" : "secondary");?>"><?php echo $item->firstname;?> <?php echo $item->lastname;?></b> | <?php echo strtoupper($item->ip);?></h6>
+                            <span class="text-xs">Click : <?php echo date("d-m h:i A",$item->created_at);?> | <?php echo $item->name;?> | Lead delay: <?php echo complete_ago($item->created_at,$item->updated_at);?></span>
                           </div>
                         </div>
                       </td>
