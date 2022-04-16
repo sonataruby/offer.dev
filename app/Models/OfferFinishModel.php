@@ -26,6 +26,7 @@ class OfferFinishModel extends Model
    
 
     public function getFinish(){
+        $this->select("*, offer_finish.created_at as timestart, offer_finish.updated_at as timelead");
         $this->join("users_profile","users_profile.user_id=offer_finish.auth_id","left");
         $this->join("offer","offer.id=offer_finish.offer_id","left");
         return $this->orderBy("offer_finish.id","DESC")->get(30)->getResult();
