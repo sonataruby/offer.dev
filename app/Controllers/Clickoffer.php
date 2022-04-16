@@ -169,7 +169,7 @@ class Clickoffer extends BaseController
                     "username" => $user->firstname." ".$user->lastname,
                     "ip" => $finish->ip,
                     "start" => $finish->created_at,
-                    "lead" => $finish->updated_at,
+                    "lead" => delay_timeago($finish->created_at, $finish->updated_at),
                     "price" => $finish->cost,
                     "name" => $offer->name
                 ];
