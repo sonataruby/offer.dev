@@ -40,13 +40,8 @@ if (! function_exists('_go'))
 
 function delay_timeago( $start,$ptime )
 {
-	$ptime = strtotime($ptime);
-	$etime = strtotime($start) - $ptime;
-
-	if( $etime < 1 )
-	{
-	    return $etime.' second ago';
-	}
+	
+	$etime = strtotime($ptime) - strtotime($start);
 
 	return date("m",$etime)." minute";
 }
