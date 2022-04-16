@@ -72,6 +72,7 @@ class OfferModel extends Model
 
     public function getTranffic(){
         $tranffic = new OfferTraficModel;
+        $tranffic->orderBy("runnumber","ASC");
         return $tranffic->findAll();
     }
 
