@@ -219,6 +219,19 @@ class Clickoffer extends BaseController
         exit();
     }
 
+    public function tranfficapionce(){
+        $data = $this->offer->getTranffic();
+        $arv = [];
+        foreach ($data as $key => $value) {
+            if($value->number > $value->runnumber){
+                $arv[] = base_url(random_string('alnum', 16)."-".$value->id."-tranffic.html");
+            }
+            
+        }
+        echo $arv[0] ? $arv[0] : "";
+        exit();
+    }
+
     public function movetoweb(){
          $url = $this->request->getGet("url");
         $data = json_decode(file_get_contents("https://raw.githubusercontent.com/jetkai/proxy-list/main/online-proxies/json/proxies-socks4%2B5-beautify.json"));
